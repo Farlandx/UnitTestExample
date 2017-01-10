@@ -12,7 +12,8 @@ namespace UnitTestExample.Tests
     public class MyClassTests
     {
         [TestMethod()]
-        public void SumTest()
+        [TestProperty("MyClass", "Sum")]
+        public void SumTest_當數值1與2是成功的情況() //測試方法要明確的寫出情境，增加可讀性
         {
             //3A Pattern
 
@@ -50,12 +51,30 @@ namespace UnitTestExample.Tests
         }
 
         [TestMethod()]
-        public void hasSpecialCharacterTest()
+        public void hasSpecialCharacterTest_當字元中有特殊符號()
         {
             #region Arrange
             var myClass = new MyClass();
             string s = "Hello, how are you?";
             var expected = true;
+            #endregion
+
+            #region Action
+            var actual = myClass.hasSpecialCharacter(s);
+            #endregion
+
+            #region Assert
+            Assert.AreEqual(expected, actual);
+            #endregion
+        }
+
+        [TestMethod()]
+        public void hasSpecialCharacterTest_當字元中無特殊符號()
+        {
+            #region Arrange
+            var myClass = new MyClass();
+            string s = "MyNameIsFarland";
+            var expected = false;
             #endregion
 
             #region Action
